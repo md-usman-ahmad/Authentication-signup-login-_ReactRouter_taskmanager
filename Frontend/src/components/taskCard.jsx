@@ -5,9 +5,6 @@ export function TaskCard({ taskId, title, description , createdAt,updatedAt , de
   const [IsEditing, setIsEditing] = useState(false);
   const updatedTitleRef = useRef();
   const updatedDescriptionRef = useRef();
-  
-
-
 
   return (
     <>

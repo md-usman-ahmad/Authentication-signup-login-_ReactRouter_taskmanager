@@ -41,9 +41,68 @@ export function DashboardPage(){
         }    
     },[])
 
+    function handleDeletingTask(taskId){
+        console.log("taskId = ",taskId);
+        axios({
+            method : "DELETE",
+            url : `http://localhost:4000/deleteTask?taskId=${taskId}`,
+            headers : {
+                Authorization : localStorage.getItem("token")
+            },
+
+        })
+        .then(function(response){
+            console.log("delete response = ",response);
+            axios.get("http://localhost:4000/getTask",{
+                headers: {
+                    Authorization: localStorage.getItem("token"),
+                },
+            })
+            .then((response)=>{
+                console.log("response = ",response); 
+                setDashboard( (prevState)=>{
+                    return {
+                        ...prevState,
+                        Isloading : false,
+                        taskList : response.data
+                    }
+                });
+            })
+            .catch((error)=>{
+                console.log("error = ",error);
+            })
+            // navigate("/herosection");    
+        })
+        .catch(function(error){
+            console.log(error);
+        })
+
+        
+    }
+
+
     return (
         <>
-            <TaskInput></TaskInput>
+            <TaskInput   onTaskCreated={() => {
+                axios.get("http://localhost:4000/getTask",{
+                    headers: {
+                        Authorization: localStorage.getItem("token"),
+                    },
+                })
+                .then((response)=>{
+                    console.log("response = ",response); 
+                    setDashboard( (prevState)=>{
+                        return {
+                            ...prevState,
+                            Isloading : false,
+                            taskList : response.data
+                        }
+                    });
+                })
+                .catch((error)=>{
+                    console.log("error = ",error);
+                })
+            }} ></TaskInput>
 
             {Dashboard.Isloading ? (
                 <>
@@ -53,7 +112,7 @@ export function DashboardPage(){
             ) : (
                 <>
                     {Dashboard.taskList.length === 0 && <EmptyTaskList></EmptyTaskList>}
-                    {Dashboard.taskList.map( (item)=>{return  <TaskCard key={item.taskId} {...item} ></TaskCard>})}
+                    {Dashboard.taskList.map( (item)=>{return  <TaskCard key={item.taskId} {...item} deleteTask={handleDeletingTask} ></TaskCard>})}
                 </>
             ) }    
         </>
