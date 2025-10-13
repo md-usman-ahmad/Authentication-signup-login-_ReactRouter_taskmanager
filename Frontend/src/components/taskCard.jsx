@@ -3,6 +3,8 @@ import { useRef, useState } from "react";
 
 export function TaskCard({ taskId, title, description , createdAt,updatedAt , deleteTask, updatingTask }) {
   const [IsEditing, setIsEditing] = useState(false);
+  const [IsDeleted, setIsDeleted] = useState(false);
+  
   const updatedTitleRef = useRef();
   const updatedDescriptionRef = useRef();
 
@@ -85,14 +87,24 @@ export function TaskCard({ taskId, title, description , createdAt,updatedAt , de
                   >
                     Edit
                   </button>
-                  <button
-                    className="delete-btn border border-red-400 text-red-400 hover:bg-red-900 px-3 py-1 rounded text-sm"
+                  {IsDeleted ? <button  disabled 
+                    className="delete-btn border border-grey-400 text-grey-400 hover:bg-grey-900 px-3 py-1 rounded text-sm  "
                     onClick={() => {
                       deleteTask(taskId);
                     }}
                   >
                     Delete
+                  </button> : 
+                  <button   
+                    className="delete-btn border border-red-400 text-red-400 hover:bg-red-900 px-3 py-1 rounded text-sm  "
+                    onClick={() => {
+                        setIsDeleted(true);
+                      deleteTask(taskId);
+                    }}
+                  >
+                    Delete
                   </button>
+              }
                 </>
               )}
             </div>

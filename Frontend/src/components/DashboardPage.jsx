@@ -63,7 +63,6 @@ export function DashboardPage(){
                 setDashboard( (prevState)=>{
                     return {
                         ...prevState,
-                        Isloading : false,
                         taskList : response.data
                     }
                 });
@@ -71,38 +70,51 @@ export function DashboardPage(){
             .catch((error)=>{
                 console.log("error = ",error);
             })
-            // navigate("/herosection");    
         })
         .catch(function(error){
             console.log(error);
         })
+    }
 
-        
+    function handleAddingAnItemIntoDB(title,description){
+        axios({
+            method : "POST",
+            url : "http://localhost:4000/addTask",
+            data : {title,description},
+            headers: {
+                Authorization: localStorage.getItem("token"),
+            },
+        })
+        .then(function(response){
+            console.log("response = ",response);
+            alert(response.data);
+            axios.get("http://localhost:4000/getTask",{
+                headers: {
+                    Authorization: localStorage.getItem("token"),
+                },
+            })
+            .then((response)=>{
+                console.log("Fetching justAfter AddingTask response.data = ",response.data); 
+                setDashboard( (prevState)=>{
+                    return {
+                        ...prevState,
+                        taskList : response.data
+                    }
+                });
+            })
+            .catch((error)=>{
+                console.log("error = ",error);
+            })
+        })
+        .catch(function(error){
+            console.log("error = ",error);
+        })
     }
 
 
     return (
         <>
-            <TaskInput   onTaskCreated={() => {
-                axios.get("http://localhost:4000/getTask",{
-                    headers: {
-                        Authorization: localStorage.getItem("token"),
-                    },
-                })
-                .then((response)=>{
-                    console.log("response = ",response); 
-                    setDashboard( (prevState)=>{
-                        return {
-                            ...prevState,
-                            Isloading : false,
-                            taskList : response.data
-                        }
-                    });
-                })
-                .catch((error)=>{
-                    console.log("error = ",error);
-                })
-            }} ></TaskInput>
+            <TaskInput addingAnItemIntoDB={handleAddingAnItemIntoDB}></TaskInput>
 
             {Dashboard.Isloading ? (
                 <>
