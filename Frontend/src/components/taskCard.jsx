@@ -1,11 +1,13 @@
 import axios from "axios";
 import { useRef, useState } from "react";
 
-export function TaskCard({ id, title, description , createdAt,updatedAt , deleteTask, updatingTask }) {
+export function TaskCard({ taskId, title, description , createdAt,updatedAt , deleteTask, updatingTask }) {
   const [IsEditing, setIsEditing] = useState(false);
   const updatedTitleRef = useRef();
   const updatedDescriptionRef = useRef();
   
+
+
 
   return (
     <>
@@ -60,7 +62,7 @@ export function TaskCard({ id, title, description , createdAt,updatedAt , delete
                     className="save-btn border border-green-400 text-green-400 hover:bg-green-900 px-3 py-1 rounded text-sm mr-2"
                     onClick={() => {
                       setIsEditing(false);
-                      updatingTask(id,updatedTitleRef.current.value,updatedDescriptionRef.current.value);
+                      updatingTask(taskId,updatedTitleRef.current.value,updatedDescriptionRef.current.value);
                       updatedTitleRef.current.value = ""
                       updatedDescriptionRef.current.value = ""
                     }}
@@ -89,7 +91,7 @@ export function TaskCard({ id, title, description , createdAt,updatedAt , delete
                   <button
                     className="delete-btn border border-red-400 text-red-400 hover:bg-red-900 px-3 py-1 rounded text-sm"
                     onClick={() => {
-                      deleteTask(id);
+                      deleteTask(taskId);
                     }}
                   >
                     Delete
