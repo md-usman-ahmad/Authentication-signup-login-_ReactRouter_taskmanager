@@ -13,19 +13,25 @@ Router.delete("/", AuthMiddleware  ,async function(request,response){
         const {taskId} = request.query;
         console.log("currentLoggedInuserId = ",currentLoggedInuserId);
 
-        let query = "select * from tasks where taskId = ?";
-        let params = [taskId];
-        let deletingTaskDetails = await dbQuery(query,params);
-        console.log("deletingTaskDetails = ",deletingTaskDetails);
 
-        if(currentLoggedInuserId === deletingTaskDetails[0].createdBy){
-            query = "delete from tasks where taskId = ?";
-            params = [taskId];
-            await dbQuery(query,params);
-            response.send(`${currentLoggedInusername}(userId-${currentLoggedInuserId}) taskId-${taskId} deletedSuccessfully`)
-        } else {
-            throw "This Task is not from your TaskList hence you cant delete";
-        }
+                    // METHOD - 1
+        // let query = "select * from tasks where taskId = ?";
+        // let params = [taskId];
+        // let deletingTaskDetails = await dbQuery(query,params);
+        // if(currentLoggedInuserId === deletingTaskDetails[0].createdBy){
+        //     query = "delete from tasks where taskId = ?";
+        //     params = [taskId];
+        //     await dbQuery(query,params);
+        //     response.send(`${currentLoggedInusername}(userId-${currentLoggedInuserId}) taskId-${taskId} deletedSuccessfully`)
+        // } else {
+        //     throw "This Task is not from your TaskList hence you cant delete";
+        // }
+
+                                // METHOD - 2
+        let query = "delete from tasks where taskId = ? AND createdBy = ?";
+        let params = [taskId,currentLoggedInuserId];
+        await dbQuery(query,params);
+        response.send(`${currentLoggedInusername}(userId-${currentLoggedInuserId}) taskId-${taskId} deletedSuccessfully`)
 
     } catch (error) {
         console.log("deleteTask error = ",error);

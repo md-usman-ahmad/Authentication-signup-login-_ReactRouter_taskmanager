@@ -19,10 +19,10 @@ Router.patch("/", AuthMiddleware  ,async function(request,response){
         // let updatingTaskDetails = await dbQuery(query,params);
         // if(currentLoggedInuserId === updatingTaskDetails[0].createdBy){
         //     query = `update tasks
-        //             set title = ? , description = ?
+        //             set title = ? , description = ? , updatedAt = ?
         //             where taskId = ?
         //             `
-        //     params = [updatedTitle , updatedDescription , taskId];
+        //     params = [updatedTitle , updatedDescription , new Date().toISOString().slice(0, 19).replace("T", " ") , taskId];
         //     await dbQuery(query , params);
         //     response.send(`${currentLoggedInusername} (userId-${currentLoggedInuserId}) taskId-${taskId} updatedSuccessfully`);
         // } else {
@@ -31,13 +31,13 @@ Router.patch("/", AuthMiddleware  ,async function(request,response){
 
                                             //Method - 2 SHort Way
         let query = `update tasks
-                     set title = ? , description = ?
+                     set title = ? , description = ? , updatedAt = ?
                      where taskId = ? AND createdBy = ?
                      `
-        let params = [updatedTitle,updatedDescription,taskId,currentLoggedInuserId];
+        let params = [updatedTitle,updatedDescription,new Date().toISOString().slice(0, 19).replace("T", " "),taskId,currentLoggedInuserId];
         await dbQuery(query,params);
         response.send(`${currentLoggedInusername} (userId-${currentLoggedInuserId}) taskId-${taskId} updatedSuccessfully`);
-        
+
     } catch (error) {
         console.log("updatedTask(PATCH) error = ",error);
         response.status(500).send(error);

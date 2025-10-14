@@ -22,12 +22,14 @@ export function TaskCard({ taskId, title, description , createdAt,updatedAt , de
                   type="text"
                   className="w-full bg-gray-700 border border-gray-600 text-white rounded px-3 py-1 mb-2 text-sm"
                   placeholder="Edit Title"
+                  defaultValue={title}
                   ref={updatedTitleRef}
                 />
                 <input
                   type="text"
                   className="w-full bg-gray-700 border border-gray-600 text-white rounded px-3 py-1 text-sm"
                   placeholder="Edit Description"
+                  defaultValue={description}
                   ref={updatedDescriptionRef}
                 />
               </>

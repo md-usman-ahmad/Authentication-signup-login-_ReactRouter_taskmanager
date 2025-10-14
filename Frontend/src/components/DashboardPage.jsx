@@ -53,6 +53,7 @@ export function DashboardPage() {
     })
       .then(function (response) {
         console.log("delete response = ", response);
+        alert(response.data);
         axios
           .get("http://localhost:4000/getTask", {
             headers: {

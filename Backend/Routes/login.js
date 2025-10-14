@@ -3,7 +3,7 @@ const dbQuery = require("../database/dbhelper");
 const Router  = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const {SECRET} = require("../constants.js");
+const {SALTROUND,SECRET} = require("../constants.js");
 
 
 
@@ -36,11 +36,37 @@ Router.post("/",async function(request,response){
         } else{
             throw "Enter every field properly Backend"
         }
-
-
-
     } catch (error) {
         console.log("loginPage error(POST) = ",error);
+        response.status(500).send(error);
+    }
+})
+
+Router.patch("/",async function(request,response){
+    try {
+        console.log("request.originalUrl = ",request.originalUrl);
+        console.log("request.method = ",request.method);
+        console.log("request.body = ",request.body);
+        const {username , newPassword} = request.body;
+
+        // checking if this user Exist or not 
+        let query = "select * from users where username = ?";
+        let params = [username];
+        let PasswordUpdateWalaUser = await dbQuery(query,params);
+        if(PasswordUpdateWalaUser.length !== 0){
+            query = `update users
+                     set password = ?
+                     where username = ?
+                     `
+            params = [bcrypt.hashSync(newPassword,SALTROUND), username];
+            await dbQuery(query,params);
+            response.send(`${username} ka  New Password created Successfully`);
+        } else{
+            throw "This Username doesnt exist in Database";
+        }
+
+    } catch (error) {
+        console.log("forgotPassword error(POST) = ",error);
         response.status(500).send(error);
     }
 })
