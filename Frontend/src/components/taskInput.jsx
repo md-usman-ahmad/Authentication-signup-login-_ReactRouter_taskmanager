@@ -2,7 +2,7 @@ import { use, useRef, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
 
-export function TaskInput({addingAnItemIntoDB}){
+export function TaskInput({addingATaskIntoDB}){
     const [TaskInput,setTaskInput] = useState(false);
 
 
@@ -12,7 +12,7 @@ export function TaskInput({addingAnItemIntoDB}){
 
     return (
         <>
-        {TaskInput && <h1 className="text-3xl font-semibold text-center mt-6 text-gray-800 tracking-wide">➕Adding Task into Database</h1>}
+        {TaskInput && <h1 className="text-3xl font-semibold text-center mx-10 text-gray-800 tracking-wide">➕Adding Task into Database</h1>}
         {!TaskInput && 
         <div className="w-1/2 mx-auto bg-white rounded-xl shadow-lg p-8 mt-4">
             <div className="flex flex-col md:flex-row gap-6 items-end">
@@ -42,7 +42,7 @@ export function TaskInput({addingAnItemIntoDB}){
                 className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-3 rounded-lg transition-colors whitespace-nowrap"
                 onClick={() => {
                 setTaskInput(true);
-                addingAnItemIntoDB(
+                addingATaskIntoDB(
                     titleRef.current.value,
                     descriptionRef.current.value
                 );

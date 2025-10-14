@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 export function TaskCard({ taskId, title, description , createdAt,updatedAt , deleteTask, updatingTask }) {
   const [IsEditing, setIsEditing] = useState(false);
   const [IsDeleted, setIsDeleted] = useState(false);
-  
+
   const updatedTitleRef = useRef();
   const updatedDescriptionRef = useRef();
 
@@ -16,7 +16,7 @@ export function TaskCard({ taskId, title, description , createdAt,updatedAt , de
         </div>
         <div className="flex  justify-between pl-3">
           <div className="flex-1 w-[400px]">
-            {false ? (
+            {IsEditing ? (
               <>
                 <input
                   type="text"
@@ -55,15 +55,15 @@ export function TaskCard({ taskId, title, description , createdAt,updatedAt , de
 
           <div className="ml-4">
             <div className="action-buttons">
-              {false ? (
+              {IsEditing ? (
                 <>
                   <button
                     className="save-btn border border-green-400 text-green-400 hover:bg-green-900 px-3 py-1 rounded text-sm mr-2"
                     onClick={() => {
                       setIsEditing(false);
                       updatingTask(taskId,updatedTitleRef.current.value,updatedDescriptionRef.current.value);
-                      updatedTitleRef.current.value = ""
-                      updatedDescriptionRef.current.value = ""
+                      updatedTitleRef.current.value = "";
+                      updatedDescriptionRef.current.value = "";
                     }}
                   >
                     Save

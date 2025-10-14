@@ -21,11 +21,13 @@ const loginRouter = require("./Routes/login.js");
 const getTaskRouter = require("./Routes/getTask.js");
 const addTaskRouter = require("./Routes/addTask.js");
 const deleteTaskRouter = require("./Routes/deleteTask.js");
+const updateTaskRouter = require("./Routes/updateTask.js");
 app.use("/signup",signupRouter);
 app.use("/login",loginRouter);
 app.use("/getTask",getTaskRouter);
 app.use("/addTask",addTaskRouter);
 app.use("/deleteTask",deleteTaskRouter);
+app.use("/updateTask",updateTaskRouter);
 
 app.listen(constants.PORT,function(){
     console.log(`server is working on PORT : ${constants.PORT}`);

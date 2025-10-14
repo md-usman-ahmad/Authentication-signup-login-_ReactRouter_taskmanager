@@ -9,7 +9,7 @@ Router.delete("/", AuthMiddleware  ,async function(request,response){
         console.log("request.method = ",request.method);
         console.log("request.query = ",request.query);
 
-        const {currentLoggedInuserId} = request;
+        const {currentLoggedInuserId,currentLoggedInusername} = request;
         const {taskId} = request.query;
         console.log("currentLoggedInuserId = ",currentLoggedInuserId);
 
@@ -22,7 +22,9 @@ Router.delete("/", AuthMiddleware  ,async function(request,response){
             query = "delete from tasks where taskId = ?";
             params = [taskId];
             await dbQuery(query,params);
-            response.send(`taskId-${taskId} of currentLoggedInuserId-${currentLoggedInuserId} deleted successfully`)
+            response.send(`${currentLoggedInusername}(userId-${currentLoggedInuserId}) taskId-${taskId} deletedSuccessfully`)
+        } else {
+            throw "This Task is not from your TaskList hence you cant delete";
         }
 
     } catch (error) {
