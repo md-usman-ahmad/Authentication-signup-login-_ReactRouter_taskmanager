@@ -23,6 +23,7 @@ export function DashboardPage() {
         .get(`${process.env.REACT_APP_API_NAME}/gettask`, {
           headers: {
             Authorization: localStorage.getItem("token"),
+            "ngrok-skip-browser-warning": "true",
           },
         })
         .then((response) => {
@@ -50,6 +51,7 @@ export function DashboardPage() {
       url: `${process.env.REACT_APP_API_NAME}/deleteTask?taskId=${taskId}`,
       headers: {
         Authorization: localStorage.getItem("token"),
+        "ngrok-skip-browser-warning": "true",
       },
     })
       .then(function (response) {
@@ -59,6 +61,7 @@ export function DashboardPage() {
           .get(`${process.env.REACT_APP_API_NAME}/getTask`, {
             headers: {
               Authorization: localStorage.getItem("token"),
+              "ngrok-skip-browser-warning": "true",
             },
           })
           .then((response) => {
@@ -130,6 +133,7 @@ export function DashboardPage() {
       },
       headers: {
         authorization: localStorage.getItem("token"),
+        "ngrok-skip-browser-warning": "true",
       },
     })
       .then(function (response) {
@@ -139,6 +143,7 @@ export function DashboardPage() {
           .get(`${process.env.REACT_APP_API_NAME}/getTask`, {
             headers: {
               Authorization: localStorage.getItem("token"),
+              "ngrok-skip-browser-warning": "true",
             },
           })
           .then((response) => {
