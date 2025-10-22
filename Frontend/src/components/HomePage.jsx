@@ -8,11 +8,11 @@ export function HomePage(){
     
 
    
-    useEffect( ()=>{
-        if(token){
-            navigate("/dashboard");
-        }
-    },[token])
+    // useEffect( ()=>{
+    //     if(token){
+    //         navigate("/dashboard");
+    //     }
+    // },[token])
 
     function logout(){
         localStorage.removeItem("token");
