@@ -15,7 +15,6 @@ export function HomePage(){
     },[token])
 
     function logout(){
-        console.log("logout fn chlaa");
         localStorage.removeItem("token");
         navigate("/herosection");
     }

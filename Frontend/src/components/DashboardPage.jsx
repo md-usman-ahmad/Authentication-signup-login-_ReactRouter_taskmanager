@@ -19,7 +19,7 @@ export function DashboardPage() {
   useEffect(() => {
     if (token) {
       axios
-        .get("http://localhost:4000/getTask", {
+        .get(process.env.API_NAME + "/getTask", {
           headers: {
             Authorization: localStorage.getItem("token"),
           },
@@ -46,7 +46,7 @@ export function DashboardPage() {
     console.log("taskId = ", taskId);
     axios({
       method: "DELETE",
-      url: `http://localhost:4000/deleteTask?taskId=${taskId}`,
+      url: `https://nonvituperative-kaylee-barely.ngrok-free.dev/deleteTask?taskId=${taskId}`,
       headers: {
         Authorization: localStorage.getItem("token"),
       },
@@ -55,7 +55,7 @@ export function DashboardPage() {
         console.log("delete response = ", response);
         alert(response.data);
         axios
-          .get("http://localhost:4000/getTask", {
+          .get("https://nonvituperative-kaylee-barely.ngrok-free.dev/getTask", {
             headers: {
               Authorization: localStorage.getItem("token"),
             },
@@ -81,7 +81,7 @@ export function DashboardPage() {
   function handleAddingATaskIntoDB(title, description) {
     axios({
       method: "POST",
-      url: "http://localhost:4000/addTask",
+      url: "https://nonvituperative-kaylee-barely.ngrok-free.dev/addTask",
       data: { title, description },
       headers: {
         Authorization: localStorage.getItem("token"),
@@ -91,7 +91,7 @@ export function DashboardPage() {
         console.log("response = ", response);
         alert(response.data);
         axios
-          .get("http://localhost:4000/getTask", {
+          .get("https://nonvituperative-kaylee-barely.ngrok-free.dev/getTask", {
             headers: {
               Authorization: localStorage.getItem("token"),
             },
@@ -117,23 +117,25 @@ export function DashboardPage() {
       });
   }
 
-  function handleUpdatingTask(taskId,updatedTitle,updatedDescription){
-    console.log(taskId ,updatedTitle, updatedDescription);
+  function handleUpdatingTask(taskId, updatedTitle, updatedDescription) {
+    console.log(taskId, updatedTitle, updatedDescription);
     axios({
-        method : "PATCH",
-        url : "http://localhost:4000/updateTask",
-        data : {
-            taskId,updatedTitle,updatedDescription
-        },
-        headers : {
-            authorization : localStorage.getItem("token")
-        }
+      method: "PATCH",
+      url: "https://nonvituperative-kaylee-barely.ngrok-free.dev/updateTask",
+      data: {
+        taskId,
+        updatedTitle,
+        updatedDescription,
+      },
+      headers: {
+        authorization: localStorage.getItem("token"),
+      },
     })
-    .then(function(response){
-        console.log("updatedTask response = ",response);
+      .then(function (response) {
+        console.log("updatedTask response = ", response);
         alert(response.data);
         axios
-          .get("http://localhost:4000/getTask", {
+          .get("https://nonvituperative-kaylee-barely.ngrok-free.dev/getTask", {
             headers: {
               Authorization: localStorage.getItem("token"),
             },
@@ -153,11 +155,10 @@ export function DashboardPage() {
           .catch((error) => {
             console.log("error = ", error);
           });
-
-    })
-    .catch(function(error){
-        console.log("updatedTask error = ",error);
-    })
+      })
+      .catch(function (error) {
+        console.log("updatedTask error = ", error);
+      });
   }
 
   return (

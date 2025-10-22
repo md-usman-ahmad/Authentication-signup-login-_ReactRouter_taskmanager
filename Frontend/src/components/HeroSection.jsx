@@ -24,7 +24,7 @@ export function HeroSection(){
                     <h1 className="text-6xl font-thin text-gray-800 mb-4">Tasks</h1>
                     <div className="w-32 h-0.5 bg-green-500 mx-auto mb-8"></div>
                     <h2 className="text-2xl font-light text-gray-600 leading-relaxed">
-                        Please login to create and see your saved tasks
+                        Welcome! login to create and see your saved tasks
                     </h2>
                     </div>
                     <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
