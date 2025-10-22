@@ -16,10 +16,11 @@ export function DashboardPage() {
 
   let token = localStorage.getItem("token");
   console.log("Dashboard token = ", token);
+  console.log("process.env.API_NAME = ", process.env);
   useEffect(() => {
     if (token) {
       axios
-        .get(process.env.API_NAME + "/getTask", {
+        .get(`${process.env.REACT_APP_API_NAME}/gettask`, {
           headers: {
             Authorization: localStorage.getItem("token"),
           },
@@ -46,7 +47,7 @@ export function DashboardPage() {
     console.log("taskId = ", taskId);
     axios({
       method: "DELETE",
-      url: `https://nonvituperative-kaylee-barely.ngrok-free.dev/deleteTask?taskId=${taskId}`,
+      url: `${process.env.REACT_APP_API_NAME}/deleteTask?taskId=${taskId}`,
       headers: {
         Authorization: localStorage.getItem("token"),
       },
@@ -55,7 +56,7 @@ export function DashboardPage() {
         console.log("delete response = ", response);
         alert(response.data);
         axios
-          .get("https://nonvituperative-kaylee-barely.ngrok-free.dev/getTask", {
+          .get(`${process.env.REACT_APP_API_NAME}/getTask`, {
             headers: {
               Authorization: localStorage.getItem("token"),
             },
@@ -81,7 +82,7 @@ export function DashboardPage() {
   function handleAddingATaskIntoDB(title, description) {
     axios({
       method: "POST",
-      url: "https://nonvituperative-kaylee-barely.ngrok-free.dev/addTask",
+      url: `${process.env.REACT_APP_API_NAME}/addTask`,
       data: { title, description },
       headers: {
         Authorization: localStorage.getItem("token"),
@@ -91,7 +92,7 @@ export function DashboardPage() {
         console.log("response = ", response);
         alert(response.data);
         axios
-          .get("https://nonvituperative-kaylee-barely.ngrok-free.dev/getTask", {
+          .get(`${process.env.REACT_APP_API_NAME}/getTask`, {
             headers: {
               Authorization: localStorage.getItem("token"),
             },
@@ -121,7 +122,7 @@ export function DashboardPage() {
     console.log(taskId, updatedTitle, updatedDescription);
     axios({
       method: "PATCH",
-      url: "https://nonvituperative-kaylee-barely.ngrok-free.dev/updateTask",
+      url: `${process.env.REACT_APP_API_NAME}/updateTask`,
       data: {
         taskId,
         updatedTitle,
@@ -135,7 +136,7 @@ export function DashboardPage() {
         console.log("updatedTask response = ", response);
         alert(response.data);
         axios
-          .get("https://nonvituperative-kaylee-barely.ngrok-free.dev/getTask", {
+          .get(`${process.env.REACT_APP_API_NAME}/getTask`, {
             headers: {
               Authorization: localStorage.getItem("token"),
             },
