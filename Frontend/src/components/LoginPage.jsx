@@ -24,7 +24,7 @@ export function LoginPage(){
         console.log(username , password);
 
             if(username && password){
-                axios.post("http://localhost:4000/login",{username,password})
+                axios.post("https://nonvituperative-kaylee-barely.ngrok-free.dev/login",{username,password})
                 .then((response)=>{
                     console.log("response = ",response); 
                     alert(response.data.message);
@@ -47,7 +47,7 @@ export function LoginPage(){
 
         axios({
             method : "PATCH",
-            url : "http://localhost:4000/login",
+            url : "https://nonvituperative-kaylee-barely.ngrok-free.dev/login",
             data : {
                 username,newPassword
             }

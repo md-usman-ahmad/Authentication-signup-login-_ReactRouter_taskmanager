@@ -19,6 +19,7 @@ const routes = createBrowserRouter([
             },
             {
                 path : "/signup",
+                
                 Component : SignupPage
             },
             {
