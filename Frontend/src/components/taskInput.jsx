@@ -58,7 +58,6 @@ export function TaskInput({addingATaskIntoDB}){
             </div>
         </div>
         }
-        
         </>
     )
 }

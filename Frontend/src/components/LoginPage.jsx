@@ -24,15 +24,12 @@ export function LoginPage() {
     console.log(username, password);
 
     if (username && password) {
-      axios
-        .post(
-          `${process.env.REACT_APP_API_NAME}/login`,
+      axios.post(`${process.env.REACT_APP_API_NAME}/login`,{ username, password },
           {
             headers: {
               "ngrok-skip-browser-warning": "true",
             },
-          },
-          { username, password }
+          }
         )
         .then((response) => {
           console.log("response = ", response);

@@ -89,6 +89,7 @@ export function DashboardPage() {
       data: { title, description },
       headers: {
         Authorization: localStorage.getItem("token"),
+        "ngrok-skip-browser-warning": "true",
       },
     })
       .then(function (response) {
@@ -98,6 +99,7 @@ export function DashboardPage() {
           .get(`${process.env.REACT_APP_API_NAME}/getTask`, {
             headers: {
               Authorization: localStorage.getItem("token"),
+              "ngrok-skip-browser-warning": "true",
             },
           })
           .then((response) => {

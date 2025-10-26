@@ -38,7 +38,10 @@ export function SignupPage(){
                 url : "http://localhost:4000/signup",
                 data : {
                     firstname,age,gender,username,email,password
-                }
+                },
+                headers : {
+                    "ngrok-skip-browser-warning": "true",
+                },
             })
             .then(function(response){
                 console.log("response SignupPage = ",response);
