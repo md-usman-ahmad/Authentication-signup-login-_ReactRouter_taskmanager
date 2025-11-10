@@ -70,6 +70,3 @@ If you’re a recruiter, developer, or just exploring this project 👀
 📧 Email: mdusmanahmaddev@gmail.com
 💼 LinkedIn: https://www.linkedin.com/in/usman-ahmad-87aa5238a/
 🐙 GitHub: https://github.com/md-usman-ahmad
-## 🧰 Folder Structure
-
-  
